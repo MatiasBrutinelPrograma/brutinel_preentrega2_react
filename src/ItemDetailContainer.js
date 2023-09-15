@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import categories from './Data';
+import { useCart } from './CartContext';
 
 function ItemDetailContainer() {
   const { itemId } = useParams();
   const [product, setProduct] = useState(null);
-
+  const { addToCart } = useCart();
+  
   useEffect(() => {
     let foundProduct = null;
 
@@ -26,11 +28,13 @@ function ItemDetailContainer() {
 
   return (
     <div>
+
       <h2>{product.name}</h2>
       <img src={product.image} alt={product.name} />
       <p>{product.description}</p>
       <p>Precio: ${product.price}</p>
-      {/* Agrega un botón para agregar al carrito */}
+      <button onClick={() => addToCart(product)}>Agregar al carrito</button>
+
     </div>
   );
 }

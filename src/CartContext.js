@@ -50,5 +50,9 @@ function cartReducer(state, action) {
 
 // Función personalizada para usar el contexto en otros componentes
 export function useCart() {
-  return useContext(CartContext);
-}
+  const { state, dispatch } = useContext(CartContext);
+  const addToCart = (product) => {
+  dispatch({ type: 'ADD_TO_CART', payload: product });
+  };
+  return { state, dispatch, addToCart }; // Asegúrate de devolver addToCart aquí si lo necesitas en otros componentes
+  }
