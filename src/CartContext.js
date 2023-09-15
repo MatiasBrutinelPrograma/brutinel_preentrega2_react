@@ -29,7 +29,8 @@ function cartReducer(state, action) {
     case 'UPDATE_CART_ITEM':
       // Implementa la lógica para actualizar la cantidad de un producto en el carrito
       return {
-        ...state, cartItems: state.cartItems.map((item) =>
+        ...state,
+        cartItems: state.cartItems.map((item) =>
           item.id === action.payload.id
             ? { ...item, quantity: action.payload.quantity }
             : item
@@ -51,8 +52,11 @@ function cartReducer(state, action) {
 // Función personalizada para usar el contexto en otros componentes
 export function useCart() {
   const { state, dispatch } = useContext(CartContext);
+
+  // Agrega dispatch al objeto que se devuelve
   const addToCart = (product) => {
-  dispatch({ type: 'ADD_TO_CART', payload: product });
+    dispatch({ type: 'ADD_TO_CART', payload: product });
   };
-  return { state, dispatch, addToCart }; // Asegúrate de devolver addToCart aquí si lo necesitas en otros componentes
-  }
+
+  return { state, dispatch, addToCart };
+}
