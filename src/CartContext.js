@@ -26,17 +26,15 @@ function cartReducer(state, action) {
       // Implementa la lógica para agregar un producto al carrito
       return { ...state, cartItems: [...state.cartItems, action.payload] };
 
-    case 'UPDATE_CART_ITEM':
-      // Implementa la lógica para actualizar la cantidad de un producto en el carrito
-      // Puedes utilizar map para actualizar la cantidad de un producto específico
-      return {
-        ...state,
-        cartItems: state.cartItems.map((item) =>
-          item.id === action.payload.id
-            ? { ...item, quantity: action.payload.quantity }
-            : item
-        ),
-      };
+      case 'UPDATE_CART_ITEM':
+        // Implementa la lógica para actualizar la cantidad de un producto en el carrito
+        return {
+          ...state, cartItems: state.cartItems.map((item) =>
+            item.id === action.payload.id
+              ? { ...item, quantity: action.payload.quantity }
+              : item
+          ),
+        };
 
     case 'REMOVE_FROM_CART':
       // Implementa la lógica para eliminar un producto del carrito

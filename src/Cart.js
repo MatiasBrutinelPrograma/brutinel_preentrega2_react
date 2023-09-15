@@ -1,13 +1,12 @@
 import React from 'react';
 import { useCart } from './CartContext';
 
-function Cart() {
-  const { state, dispatch } = useCart();
-}
-function Cart({ cartItems, updateCartItem, removeCartItem }) {
-  // Calcula el precio total del carrito
-  const totalPrice = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
+function Cart ({ cartItems, updateCartItem, removeCartItem }) {
+const { state, dispatch } = useCart();
+// Calcula el precio total del carrito
+const totalPrice = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
 
+ {
   return (
     <div>
       <h2>Carrito de Compras</h2>
@@ -30,5 +29,5 @@ function Cart({ cartItems, updateCartItem, removeCartItem }) {
     </div>
   );
 }
-
+}
 export default Cart;
