@@ -1,14 +1,32 @@
 import React from 'react';
+import { useCart } from './CartContext';
 
 function Cart() {
-  // Obtener el contenido del carrito desde el estado global o contexto.
+  const { state, dispatch } = useCart();
+}
+function Cart({ cartItems, updateCartItem, removeCartItem }) {
+  // Calcula el precio total del carrito
+  const totalPrice = cartItems.reduce((total, item) => total + item.quantity * item.price, 0);
 
   return (
     <div>
-      {/* Mostrar lista de productos en el carrito */}
-      {/* Permitir actualizar cantidad y eliminar productos */}
-      {/* Mostrar precio total */}
-      {/* Botón para proceder al proceso de pago */}
+      <h2>Carrito de Compras</h2>
+      {cartItems.length === 0 ? (
+        <p>El carrito está vacío.</p>
+      ) : (
+        <ul>
+          {cartItems.map((item) => (
+            <li key={item.id}>
+              {item.name} - Cantidad: {item.quantity} - Precio Unitario: ${item.price.toFixed(2)}
+              <button onClick={() => updateCartItem(item.id, item.quantity + 1)}>+</button>
+              <button onClick={() => updateCartItem(item.id, item.quantity - 1)}>-</button>
+              <button onClick={() => removeCartItem(item.id)}>Eliminar</button>
+            </li>
+          ))}
+        </ul>
+      )}
+      <p>Precio Total: ${totalPrice.toFixed(2)}</p>
+      <button>Proceder al Pago</button>
     </div>
   );
 }

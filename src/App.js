@@ -4,22 +4,29 @@ import Navbar from './Navbar';
 import ItemListContainer from './ItemListContainer';
 import ItemDetailContainer from './ItemDetailContainer';
 import Cart from './Cart';
+import { CartProvider } from './CartContext';
 
-function App() {
+const App = () => {
   return (
+    <CartProvider>
     <Router>
-    <div className="App">
+    <div>
       <Navbar />
 
       <Routes>
+
         <Route path="/" element={<ItemListContainer />} />
         <Route path="/category/:categoryId" element={<ItemListContainer />} />
         <Route path="/item/:itemId" element={<ItemDetailContainer />} />
-      </Routes>
+        <Route path="/cart" element={<Cart />} />
+
+        </Routes>
 
       <Cart />
     </div>
-  </Router>
-);
-}
+    </Router>
+    </CartProvider>
+  );
+};
+
 export default App;
