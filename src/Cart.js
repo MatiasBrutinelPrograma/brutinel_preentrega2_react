@@ -1,16 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useCart } from './CartContext';
 
 function Cart() {
   const { state, dispatch } = useCart();
-
-  // Función para calcular el precio total del carrito
-  const calculateTotalPrice = () => {
-    return state.cartItems.reduce(
-      (total, item) => total + item.quantity * item.price,
-      0
-    );
-  };
+  const [totalPrice, setTotalPrice] = useState(0); // Inicializamos el precio total como 0
 
   const updateCartItem = (productId, newQuantity) => {
     // Implementa la lógica para actualizar la cantidad de un producto en el carrito
@@ -20,8 +13,14 @@ function Cart() {
     });
   };
 
-  // Recalcula el precio total cada vez que cambia el carrito
-  const totalPrice = calculateTotalPrice();
+  // Calcula el precio total cada vez que cambia el estado del carrito
+  useEffect(() => {
+    const newTotalPrice = state.cartItems.reduce(
+      (total, item) => total + item.quantity * item.price,
+      0
+    );
+    setTotalPrice(newTotalPrice);
+  }, [state.cartItems]); // Esta dependencia asegura que se recalcule cuando cambie el carrito
 
   return (
     <div className="cart">
