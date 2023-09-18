@@ -18,11 +18,10 @@ function Cart() {
       type: 'UPDATE_CART_ITEM',
       payload: { id: productId, quantity: newQuantity },
     });
-
-    // Actualiza el precio total después de modificar el carrito
-    const totalPrice = calculateTotalPrice();
-    console.log(totalPrice);
   };
+
+  // Recalcula el precio total cada vez que cambia el carrito
+  const totalPrice = calculateTotalPrice();
 
   return (
     <div className="cart">
@@ -47,7 +46,7 @@ function Cart() {
           ))}
         </ul>
       )}
-      <p className="product-price">Precio Total: ${calculateTotalPrice().toFixed(2)}</p>
+      <p className="product-price">Precio Total: ${totalPrice.toFixed(2)}</p>
       <button className="checkout">Proceder al Pago</button>
     </div>
   );
